@@ -53,6 +53,6 @@ you can see this(form the issue answer of [GeoMAN](https://github.com/yoshall/Ge
 - global_inputs.npy: (500, 35) 所有的传感器目标属性数据<br>
 - global_attn_state.npy: (500, 35, 19, 12) 所有的传感器数据<br>
 
-## reference
+## Reference
 Tensorflow implements<br>
 [GeoMAN](https://github.com/yoshall/GeoMAN)<br>
