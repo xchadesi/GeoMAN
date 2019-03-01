@@ -7,13 +7,13 @@ a easy pytorch implement of GeoMAN
 Yuxuan Liang, Songyu Ke, Junbo Zhang, Xiuwen Yi, Yu Zheng, "GeoMAN: Multi-level Attention Networks for Geo-sensory Time Series Prediction", IJCAI, 2018.
 
 ## Model Input
-The model has the following inputs:
-local_inputs: the input of local spatial attention, shape->[batch_size, n_steps_encoder, n_input_encoder]
-global_inputs: the input of global spatial attention, shape->[batch_size, n_steps_encoder, n_sensors]
-external_inputs: the input of external factors, shape->[batch_size, n_steps_decoder, n_external_input]
-local_attn_states: shape->[batch_size, n_input_encoder, n_steps_encoder]
-global_attn_states: shape->[batch_size, n_sensors, n_input_encoder, n_steps_encoder]
-labels: ground truths, shape->[batch_size, n_steps_decoder, n_output_decoder]
+The model has the following inputs:<br>
+- local_inputs: the input of local spatial attention, shape->[batch_size, n_steps_encoder, n_input_encoder]<br>
+- global_inputs: the input of global spatial attention, shape->[batch_size, n_steps_encoder, n_sensors]<br>
+- external_inputs: the input of external factors, shape->[batch_size, n_steps_decoder, n_external_input]<br>
+- local_attn_states: shape->[batch_size, n_input_encoder, n_steps_encoder]<br>
+- global_attn_states: shape->[batch_size, n_sensors, n_input_encoder, n_steps_encoder]<br>
+- labels: ground truths, shape->[batch_size, n_steps_decoder, n_output_decoder]<br>
 
 ### How to understand the input data?
 
@@ -53,5 +53,6 @@ you can see this(form the issue answer of [GeoMAN](https://github.com/yoshall/Ge
 - global_inputs.npy: (500, 35) 所有的传感器目标属性数据<br>
 - global_attn_state.npy: (500, 35, 19, 12) 所有的传感器数据<br>
 
+## reference
 Tensorflow implements<br>
 [GeoMAN](https://github.com/yoshall/GeoMAN)<br>
