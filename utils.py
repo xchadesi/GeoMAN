@@ -25,7 +25,7 @@ def Linear(args, output_size, bias, bias_initializer=None):
     
     # Now the computation.
     weights = nn.Parameter(torch.FloatTensor(total_arg_size, output_size))
-    init.xavier_uniform(weights)
+    init.xavier_uniform_(weights)
     #weights = Variable(torch.zeros(total_arg_size, output_size))
     if len(args) == 1:
         res = torch.matmul(args[0], weights)
@@ -48,18 +48,18 @@ def basic_hyperparams():
         'dropout_rate':0.3,
         'n_stacked_layers':2,
         's_attn_flag':2,
-        'ext_flag':False,
+        'ext_flag':True,
 
         # encoder parameter
-        'n_sensors':307,
-        'n_input_encoder':3,
-        'n_steps_encoder':5,  # time steps
+        'n_sensors':35,
+        'n_input_encoder':19,
+        'n_steps_encoder':12,  # time steps
         'n_hidden_encoder':64,  # size of hidden units
 
         # decoder parameter
         'n_input_decoder':1,
         'n_external_input':83,
-        'n_steps_decoder':5,
+        'n_steps_decoder':6,
         'n_hidden_decoder':64,
         'n_output_decoder':1  # size of the decoder output
     }
