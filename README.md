@@ -51,7 +51,7 @@ The model has the following inputs:<br>
 - global_inputs.npy: (500, 35) 所有的传感器目标属性数据<br>
 - global_attn_state.npy: (500, 35, 19, 12) 所有的传感器数据<br>
 
-### How to understand the Local atttion and Global attention
+### How to understand the Local atttion and Global attention？
 
 从500条数据中，选取一条数据包含：data = [35个传感器[每个传感器包含19个其它维度[每个维度包含12个时间步]]] <br>
 
