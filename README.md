@@ -6,6 +6,22 @@ a easy pytorch implement of GeoMAN
 ## Paper
 Yuxuan Liang, Songyu Ke, Junbo Zhang, Xiuwen Yi, Yu Zheng, "GeoMAN: Multi-level Attention Networks for Geo-sensory Time Series Prediction", IJCAI, 2018.
 
+## Application Scene
+
+<div align=center><img src="https://github.com/xchadesi/GeoMAN/blob/master/scene.png"/></div>
+
+上图是北京市地区的空气检测站的分布图，每一个检测站被称之为一个sensor，每一个sensor在一天之内都会间隔固定的时间（一般是5min）采集空气数据，其中包括：温度、湿度、PM2.5（是本文需要预测的指标---目标属性）、NO、NO2、以及各个方向的风力大小等19个维度的属性特征。这种场景的数据特点就是，每一个sensor地理位置是不会变化的，它们之间的相对位置也是不变的，但是由于是每隔一段时间就会采集一次数据，因此每一个sensor都会产生一系列的时序数据。假设sensor的数量是Ng个，每一个sensor采集的属性特征数为Nl。分析任务就是，给一个时间间隔T范围内的所有sensor数据，来预测某一个sensori在接下来的T+τ时间段内的某一维属性特征序列值。从问题描述我们可以知道，对于其中的一个sensor X，它在一段时间T内产生的数据可以用矩阵来表示，这个矩阵的维度是Nl∗T。
+
+## Model Framework
+
+从问题分类上看，这是一个时间序列的回归问题，损失函数也就是简单的均方损失函数。由于是序列生成序列，故本文采用的是经典的seq2seq架构（在NLP中常用于机器翻译和摘要生成等任务），因此一定会使用encoder-decoder架构，同时由于该任务的特殊性，本文在decoder生成阶段又巧妙的引入了其他的外部信息（比方说sensor对应的poi信息，天气信息以及sensor ID信息），显著地提升了模型的性能。整个模型如下所示： 
+<div align=center><img src="https://github.com/xchadesi/GeoMAN/blob/master/model.png"/></div>
+
+可以看出在encoder和decoder该模型都使用了LSTM，在LSTM的输入部分可以看到一个被称之为“Spatial Attn”的结构，从右边放大的框图可以看出这个结构由“Local”和“Global”拼接而成即[local_x; global_x]，这个“Local”指的是当前被预测的sensori的信息编码，“Global”指的则是其他sensor的信息编码，这两个编码过程中都是用了Attention机制。
+<div align=center><img src="https://github.com/xchadesi/GeoMAN/blob/master/local_global_attention.png"/></div>
+<div align=center><img src="https://github.com/xchadesi/GeoMAN/blob/master/temporal_attention.png"/></div>
+
+
 ## Model Input
 The model has the following inputs:<br>
 - local_inputs: the input of local spatial attention, shape->[batch_size, n_steps_encoder, n_input_encoder]<br>
