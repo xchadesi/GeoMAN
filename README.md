@@ -62,11 +62,11 @@ you can see this(form the issue answer of [GeoMAN](https://github.com/yoshall/Ge
  
  计算局部注意力：local_data = data[每个传感器包含19个其它维度[每个维度包含12个时间步]]<br>
  
-              local_x = attention(local_data)<br>
+              local_x = attention(local_data)
               
  计算全局注意力：global_data = data[35个传感器[每个传感器包含12个时间步，目标属性的维度]]  <br>
  
-              global_x = attention(global_data)<br>
+              global_x = attention(global_data)
 
 ## Reference
 Tensorflow implements<br>
